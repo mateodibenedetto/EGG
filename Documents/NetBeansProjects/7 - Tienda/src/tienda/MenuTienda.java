@@ -50,23 +50,20 @@ public class MenuTienda {
                 fabricanteService.crearFabricante();
             break;  
             case "h":
-                System.out.println("Que desea modificar i=Codigo - j=Nombre - k=Precio - l=Salir: ");
+                System.out.println("Que desea modificar i=Nombre - j=Precio - k=Salir: ");
                 String opcion2 = r.next().toLowerCase();
 
                 switch (opcion2) {
                     case "i":
-                        productoService.modificarCodigo();
-                    break;
-                    case "j":
                         productoService.modificarNombre();
                         productoService.imprimirNombres();
                     break;
-                    case "k":
+                    case "j":
                         productoService.modificarPrecio();
                         productoService.imprimirPrecios();
                     break;
                     default:
-                        opcion2 = "l";
+                        opcion2 = "k";
                     break;
                 }
 

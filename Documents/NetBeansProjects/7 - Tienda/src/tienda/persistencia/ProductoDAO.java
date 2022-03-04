@@ -29,15 +29,15 @@ public final class ProductoDAO extends DAO {
         }
     }    
     
-    public void modificarProducto(Producto fabricante) throws Exception {
+    public void modificarNombreProducto(Producto producto) throws Exception {
         
         try {
-            if (fabricante == null) {
+            if (producto == null) {
                 throw new Exception("Debes indicar el producto que desea modificar");
             }
             
             String sql = "UPDATE producto SET "
-                    + "codigo = '" + fabricante.getCodigo() + "' WHERE nombre = '" + fabricante.getNombre() + "';";
+                    + "nombre = '" + producto.getNombre() + "' WHERE codigo = '" + producto.getCodigo() + "';";
             
             insertUpdateDelete(sql);
             
@@ -47,6 +47,26 @@ public final class ProductoDAO extends DAO {
             desconectarDB();
         }
     }
+    
+    public void modificarPrecio(Producto producto) throws Exception {
+        
+        try {
+            if (producto == null) {
+                throw new Exception("Debes indicar el producto que desea modificar");
+            }
+            
+            String sql = "UPDATE producto SET "
+                    + "precio = '" + producto.getPrecio() + "' WHERE codigo = '" + producto.getCodigo() + "';";
+            
+            insertUpdateDelete(sql);
+            
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            desconectarDB();
+        }
+    }
+    
  
     public void eliminarProducto(int codigo) throws ClassNotFoundException, SQLException, Exception {
         

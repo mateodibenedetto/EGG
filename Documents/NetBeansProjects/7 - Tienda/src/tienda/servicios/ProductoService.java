@@ -55,16 +55,16 @@ public class ProductoService {
 
     public void modificarNombre() throws Exception {
         Scanner r = new Scanner(System.in).useDelimiter("\n");
-        System.out.println("Ingrese el nombre que quiere modificar");
-        String nombreActual = r.next();
+        System.out.println("Ingrese el codigo del nombre que quiere modificar");
+        int codigo = r.nextInt();
         System.out.println("Ingrese el nombre nuevo");
         String nuevoNombre = r.next();
 
         try {
 
             //Validamos
-            if (nombreActual == null || nombreActual.trim().isEmpty()) {
-                throw new Exception("Debe indicar el nombre");
+            if (codigo < 0) {
+                throw new Exception("el codigo no puede ser menor a cero");
             }
 
             if (nuevoNombre == null || nuevoNombre.trim().isEmpty()) {
@@ -72,16 +72,17 @@ public class ProductoService {
             }
 
             //Buscamos
-            Producto producto = dao.buscarProductoPorNombre(nombreActual);
+            Producto producto = dao.buscarProductoPorCodigo(codigo);
 
             //Validamos
-            if (!producto.getNombre().equals(nombreActual)) {
-                throw new Exception("El nombre que ingreso no esta registrado en la base de datos");
+            if (!(producto.getCodigo() == codigo)) {
+                throw new Exception("El codigo que ingreso no esta registrado en la base de datos");
             }
 
             //Modificamos
+            producto.setCodigo(codigo);
             producto.setNombre(nuevoNombre);
-            dao.modificarProducto(producto);
+            dao.modificarNombreProducto(producto);
         } catch(InputMismatchException e) {
             System.out.println(e);
         } catch (Exception e) {
@@ -89,61 +90,32 @@ public class ProductoService {
         }
     }
     
-    public void modificarCodigo() throws Exception {
-        Scanner r = new Scanner(System.in).useDelimiter("\n");
-        System.out.println("Ingrese el codigo que quiere modificar");
-        int codigoActual = r.nextInt();
-        System.out.println("Ingrese el codigo nuevo");
-        int nuevoCodigo = r.nextInt();
-        
-        try {
-            //Validamos
-            if (codigoActual <= 0) {
-                throw new Exception("El codigo no puede ser menor o igual a cero");
-            }
-
-            //Buscamos
-            Producto producto = dao.buscarProductoPorCodigo(codigoActual);
-
-            //Validamos
-            if (!(producto.getCodigo() ==  codigoActual)) {
-                throw new Exception("El nombre que ingreso no esta registrado en la base de datos");
-            }
-
-            //Modificamos
-            producto.setCodigo(nuevoCodigo);
-            dao.modificarProducto(producto);
-        } catch(InputMismatchException e) {
-            System.out.println(e);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
     
-     public void modificarPrecio() throws Exception {
+    public void modificarPrecio() throws Exception {
         Scanner r = new Scanner(System.in).useDelimiter("\n");
-        System.out.println("Ingrese el precio que quiere modificar");
-        double precioActual = r.nextDouble();
+        System.out.println("Ingrese el codigo del producto que quiera modificar");
+        int codigo = r.nextInt();
         System.out.println("Ingrese el precio nuevo");
         double nuevoPrecio = r.nextDouble();
         
         try {
             //Validamos
-            if (precioActual <= 0) {
+            if (codigo <= 0) {
                 throw new Exception("El codigo no puede ser menor o igual a cero");
             }
 
             //Buscamos
-            Producto producto = dao.buscarProductoPorPrecio(precioActual);
+            Producto producto = dao.buscarProductoPorCodigo(codigo);
 
             //Validamos
-            if (!(producto.getPrecio() == precioActual)) {
-                throw new Exception("El nombre que ingreso no esta registrado en la base de datos");
+            if (!(producto.getCodigo() == codigo)) {
+                throw new Exception("El codigo que ingreso no esta registrado en la base de datos");
             }
 
             //Modificamos
+            producto.setCodigo(codigo);
             producto.setPrecio(nuevoPrecio);
-            dao.modificarProducto(producto);
+            dao.modificarPrecio(producto);
         } catch(InputMismatchException e) {
             System.out.println(e);
         } catch (Exception e) {
@@ -213,6 +185,25 @@ public class ProductoService {
         }
     }
 
+    public void imprimirProductos() throws Exception {
+
+        try {
+
+            //Listamos los usuarios
+            Collection<Producto> productos = dao.listarProductos();
+
+            //Imprimimos los usuarios
+            if (productos.isEmpty()) {
+                throw new Exception("No existen productos para imprimir");
+            } else {
+                for (Producto u : productos) {
+                    System.out.println(u);
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     public void imprimirNombresPrecios() throws Exception {
 
         try {
@@ -304,7 +295,9 @@ public class ProductoService {
             if (productos.isEmpty()) {
                 throw new Exception("No existen productos para imprimir");
             } else {
-                    System.out.println(productos);
+                for (Producto u : productos) {
+                    System.out.println(u);
+                }
             }
         } catch (Exception e) {
             throw e;
