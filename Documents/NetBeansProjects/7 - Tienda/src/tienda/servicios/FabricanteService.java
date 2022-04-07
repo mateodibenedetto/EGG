@@ -42,6 +42,7 @@ public class FabricanteService {
             fabricante.setCodigo(codigo);
             fabricante.setNombre(nombre);
             dao.guardarFabricante(fabricante);
+            System.out.println("Se creo el fabricante");
         } catch (Exception e) {
             throw e;
         }

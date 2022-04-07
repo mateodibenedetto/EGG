@@ -48,6 +48,7 @@ public class ProductoService {
             producto.setNombre(nombre);
             producto.setCodigo_fabricante(codigoFabricante);
             dao.guardarProducto(producto);
+            System.out.println("Se creo el producto");
         } catch (Exception e) {
             throw e;
         }
@@ -216,7 +217,7 @@ public class ProductoService {
                 throw new Exception("No existen productos para imprimir");
             } else {
                 for (Producto u : productos) {
-                    System.out.println(u);
+                    System.out.println("Nombre: " + u.getNombre() + " - Precio: " + u.getPrecio());
                 }
             }
         } catch (Exception e) {
@@ -236,7 +237,7 @@ public class ProductoService {
                 throw new Exception("No existen productos para imprimir");
             } else {
                 for (Producto u : productos) {
-                    System.out.println(u);
+                    System.out.println("Nombre: " + u.getNombre());
                 }
             }
         } catch (Exception e) {
@@ -256,7 +257,7 @@ public class ProductoService {
                 throw new Exception("No existen productos para imprimir");
             } else {
                 for (Producto u : productos) {
-                    System.out.println(u);
+                    System.out.println("Nombre: " + u.getNombre() + " - Precio: " + u.getPrecio());
                 }
             }
         } catch (Exception e) {
@@ -276,7 +277,7 @@ public class ProductoService {
                 throw new Exception("No existen productos para imprimir");
             } else {
                 for (Producto u : productos) {
-                    System.out.println(u);
+                    System.out.println("Nombre: " + u.getNombre());
                 }
             }
         } catch (Exception e) {
@@ -296,7 +297,7 @@ public class ProductoService {
                 throw new Exception("No existen productos para imprimir");
             } else {
                 for (Producto u : productos) {
-                    System.out.println(u);
+                    System.out.println("Nombre: " + u.getNombre() + " - Precio: " + u.getPrecio());
                 }
             }
         } catch (Exception e) {
